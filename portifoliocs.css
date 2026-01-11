@@ -1,0 +1,228 @@
+/* Reset padrão: remove margens/preenchimentos e define o modelo de caixa */
+* {
+    margin: 0; padding: 0;                    /* Remove espaçamentos automáticos do navegador */
+    box-sizing: border-box;                   /* Impede que bordas aumentem o tamanho total dos elementos */
+    font-family: 'Segoe UI', sans-serif;      /* Define a fonte padrão para todo o texto do HTML */
+}
+
+/* Define o comportamento de rolagem suave para toda a página */
+html {
+    scroll-behavior: smooth;                  /* Faz a tela deslizar suavemente ao clicar nos links */
+}
+
+/* Declaração de variáveis globais de cores e efeitos */
+:root {
+    --primario: grey;                         /* Cor principal usada em botões e destaques */
+    --secundario: #ffffff;                    /* Cor branca para textos e fundos claros */
+    --escuro: #333333;                        /* Cor cinza escuro para o fundo principal */
+    --maisescuro: #000000;                    /* Preto absoluto para contrastes fortes */
+    --claro: #f4f4f4;                         /* Cinza bem claro para detalhes sutis */
+    --vidro: rgba(255, 255, 255, 0.2);        /* Transparência branca para efeito de vidro */
+}
+
+/* Configuração de cor de fundo e texto padrão do corpo */
+body {
+    background-color: var(--escuro);          /* Aplica o fundo cinza escuro no corpo do site */
+    color: var(--secundario);                 /* Define que todos os textos serão brancos por padrão */
+}
+
+/* Fixa a barra de navegação no topo e define sua aparência */
+.navegacao {
+    position: fixed; top: 0%;                 /* Prende o menu no topo da tela durante o scroll */
+    background: rgba(15, 23, 42, 0.8);        /* Fundo escuro semi-transparente para o menu */
+    width: 100%; z-index: 100;                /* Ocupa toda a largura e fica por cima de outros elementos */
+    padding: 1.5rem;                          /* Espaço interno para os links não tocarem as bordas */
+}
+
+/* Organiza os itens da lista do menu em linha e centralizados */
+.menu {
+    display: flex;                            /* Ativa o alinhamento flexível para os itens da lista */
+    justify-content: center;                  /* Centraliza os links do menu horizontalmente */
+    list-style: none; gap: 3rem;              /* Remove as bolinhas da lista e afasta os itens */
+}
+
+/* Estiliza os links do menu e prepara a posição para o efeito de linha */
+.menu-link {
+    text-decoration: none;                    /* Remove o sublinhado padrão de links azuis */
+    color: var(--secundario);                 /* Aplica a cor branca definida nas variáveis */
+    font-weight: 500; position: relative;     /* Deixa o texto médio e prepara para a linha animada */
+    padding: 0.5rem 0;                        /* Espaço vertical para o clique do mouse */
+}
+
+/* Cria a linha invisível abaixo do link para animação futura */
+.menu-link::after {
+    content: ''; position: absolute;          /* Cria um elemento visual extra sem mexer no HTML */
+    height: 2px; width: 0%;                   /* Define a espessura da linha, começando com largura zero */
+    bottom: 0; left: 0; background: grey;     /* Posiciona a linha na base e define a cor cinza */
+    transition: width 0.3s ease;              /* Controla a velocidade da linha aparecendo */
+}
+
+/* Faz a linha aparecer totalmente ao passar o mouse sobre o link */
+.menu-link:hover::after {
+    width: 100%;                              /* Faz a linha ocupar 100% da largura ao passar o mouse */
+}
+
+/* Centraliza o conteúdo principal (Hero) vertical e horizontalmente */
+.cabecalho {
+    min-height: 99vh;                         /* Faz a seção de abertura ocupar quase toda a tela */
+    display: flex; flex-direction: column;    /* Organiza foto e nome um embaixo do outro */
+    justify-content: center;                  /* Centraliza o conteúdo no meio da altura da tela */
+    align-items: center;                      /* Centraliza o conteúdo no meio da largura da tela */
+}
+
+/* Define dimensões, bordas arredondadas e sombra da foto de perfil */
+.foto-perfil {
+    width: 350px; height: 350px;              /* Define o tamanho fixo da imagem de perfil */
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.3); /* Aplica um brilho suave ao redor da foto */
+    border-radius: 50%;                       /* Transforma o quadrado da imagem em um círculo */
+    border: 10px solid var(--vidro);          /* Cria uma moldura grossa e transparente (vidro) */
+}
+
+/* Estiliza o título principal com tamanho e margens específicas */
+h1 {
+    font-size: 3.0rem; font-weight: bold;     /* Deixa o seu nome grande e com traço grosso */
+    margin: 20px 0 10px 0;                    /* Dá espaço entre o nome, a foto e o parágrafo */
+}
+
+/* Aplica espaçamento interno para a seção "Sobre" */
+.sobre {
+    padding: 6rem 2rem;                       /* Cria um respiro grande entre as seções do site */
+}
+
+/* Estiliza e centraliza o título da seção "Sobre" */
+.sobre-titulo {
+    font-size: 3rem; text-align: center;      /* Define o tamanho e centraliza o título da seção */
+    margin-bottom: 20px;                      /* Empurra o texto para baixo para não ficar grudado */
+}
+
+/* Configura a caixa com efeito de desfoque e transparência (vidro) */
+.sobre-caixa {
+    padding: 2rem; max-width: 800px;          /* Define o tamanho interno e largura máxima do texto */
+    margin: 0 auto; border-radius: 16px;      /* Centraliza a caixa na tela e arredonda as quinas */
+    backdrop-filter: blur(10px);              /* Faz o fundo atrás da caixa ficar embaçado */
+    background: var(--vidro);                 /* Aplica a cor semi-transparente na caixa */
+}
+
+/* Centraliza o texto e define o tamanho da fonte dos parágrafos */
+.paragrafo {
+    text-align: center; font-size: 1.5rem;    /* Centraliza e aumenta a letra do texto descritivo */
+}
+
+/* Define o preenchimento da seção de projetos */
+.projeto {
+    padding: 6rem 2rem;                       /* Mantém o mesmo espaçamento da seção "Sobre" */
+}
+
+/* Centraliza e define margem para o título de projetos */
+.projeto-titulo {
+    text-align: center; font-size: 2.5rem;    /* Centraliza e define o tamanho do título de projetos */
+    margin-bottom: 50px;                      /* Dá espaço entre o título e os cards dos projetos */
+}
+
+/* Aplica sombra e leve aumento de escala ao interagir com o card */
+.projeto-card:hover {
+    box-shadow: 0 10px 20px grey;             /* Adiciona sombra cinza ao passar o mouse */
+    transform: translateY(-10px) scale(1.03); /* Faz o card "flutuar" e crescer levemente */
+}
+
+/* Cria o grid responsivo para alinhar os cartões de projeto */
+.projeto-caixa {
+    display: grid;                            /* Ativa o sistema de malha (grade) de projetos */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Faz os cards se ajustarem sozinhos à tela */
+    gap: 2rem; max-width: 1100px;             /* Define o espaço entre cards e a largura do conjunto */
+    margin: 0 auto;                           /* Centraliza o bloco de projetos no meio da página */
+}
+
+/* Define o visual do card, centraliza conteúdo e oculta sobras */
+.projeto-card {
+    background: var(--vidro);                 /* Aplica o efeito de vidro no fundo do card */
+    border-radius: 16px; overflow: hidden;    /* Arredonda o card e corta imagens que saiam da borda */
+    display: flex; flex-direction: column;    /* Alinha imagem e texto um abaixo do outro */
+    align-items: center; text-align: center;  /* Centraliza todo o conteúdo dentro do card */
+    transition: all 0.5s ease;                /* Torna todas as animações do card suaves */
+}
+
+/* Ajusta a imagem para cobrir a área sem distorcer e define altura */
+.projeto-imagem {
+    height: 300px; width: 100%;               /* Define altura fixa e largura total da imagem no card */
+    object-fit: cover;                        /* Corta a imagem para preencher o espaço sem esticar */
+}
+
+/* Gerencia o espaçamento e alinhamento do texto interno do card */
+.caixa-texto-projeto {
+    padding: 1.5rem;                          /* Cria um respiro interno para os textos do card */
+}
+
+/* Estiliza o título individual de cada projeto */
+.info-projeto {
+    margin-bottom: 10px; font-size: 1.5rem;   /* Define tamanho e espaço abaixo do nome do projeto */
+}
+
+/* Define a cor e o espaçamento entre linhas da descrição do projeto */
+.paragrafo-projeto {
+    color: var(--secundario);                 /* Mantém o texto da descrição do projeto em branco */
+    line-height: 1.5rem;                      /* Aumenta o espaço entre as linhas para facilitar a leitura */
+}
+
+/* Configura o layout do formulário e o espaçamento entre campos */
+.formularrio-contato {
+    max-width: 600px; margin: 0 auto;         /* Define largura do form e centraliza na horizontal */
+    background: var(--escuro);                /* Define a cor de fundo interna do formulário */
+    padding: 2.5rem; border-radius: 16px;     /* Espaço interno grande e quinas arredondadas */
+    display: flex; flex-direction: column;    /* Coloca cada linha de input uma abaixo da outra */
+    gap: 1.5rem;                              /* Define o espaço entre cada campo do formulário */
+}
+
+/* Centraliza os campos de entrada dentro do formulário */
+.grupo-form {
+    display: flex; flex-direction: row;       /* Coloca a mensagem e o botão na mesma linha */
+    justify-content: center; gap: 1rem;       /* Centraliza o conjunto e dá espaço entre eles */
+    align-items: stretch; width: 100%;        /* Faz o botão ter a mesma altura da caixa de mensagem */
+}
+
+/* Estiliza o botão para ocupar uma parte menor da linha */
+.botao {
+    flex: 1; cursor: pointer;                 /* Define que o botão é menor que o campo e mostra a "mãozinha" */
+    background-color: var(--primario);        /* Aplica a cor cinza no fundo do botão */
+    color: white; border: none;               /* Texto branco e remove a borda padrão feia */
+    border-radius: 8px; font-weight: bold;    /* Arredonda quinas e destaca o texto do botão */
+    transition: 0.3s;                         /* Faz a transição de cor do hover ser suave */
+}
+
+/* Aplica efeito visual de destaque ao passar o mouse no botão */
+.botao:hover {
+    filter: brightness(1.1);                  /* Deixa o botão um pouco mais claro ao passar o mouse */
+    transform: scale(1.02);                   /* Dá um leve aumento de tamanho para indicar interação */
+}
+
+/* Altera o estado visual do botão quando clicado */
+.botao:active {
+    transform: scale(0.98);                   /* Dá um efeito de "clique" diminuindo levemente o botão */
+}
+
+/* Estiliza o design visual de inputs e textareas */
+.campo-form {
+    flex: 2; width: auto;                     /* Faz o campo de texto ser maior que o botão na linha */
+    padding: 1rem; border-radius: 8px;        /* Espaço para o texto não encostar na borda e arredonda */
+    background: rgba(15, 23, 42, 0.8);        /* Define o fundo escuro do campo de digitação */
+    color: white; border: 1px solid var(--vidro); /* Texto branco e borda discreta de vidro */
+    outline: none;                            /* Remove a linha azul que o navegador coloca ao clicar */
+}
+
+/* Altera a cor da borda quando o campo recebe foco/clique */
+.campo-form:focus {
+    border-color: whitesmoke;                 /* Muda a borda para branco fumaça ao clicar para digitar */
+    background-color: #333333;                /* Escurece o fundo para destacar que o campo está ativo */
+}
+
+/* Define altura mínima e comportamento de redimensionamento da área de texto */
+textarea.campo-form {
+    min-height: 120px;                        /* Garante um espaço bom para escrever mensagens longas */
+    resize: vertical;                         /* Permite que o usuário aumente a altura, mas não a largura */
+}
+
+/* Remove o sublinhado e define a cor padrão do link do projeto */
+.link-projeto {
+    text-decoration: none !important;         /* Garante que o link do GitHub não tenha sublinhado */
+    color: var(--claro);                      /* Define a cor clara para o link do projeto */
+}
