@@ -1,0 +1,397 @@
+/* =========================================
+   RESET E CONFIGURAÇÕES GERAIS
+   ========================================= */
+* {
+    margin: 0; /* Remove margens externas padrão de todos os elementos */
+    padding: 0; /* Remove preenchimentos internos padrão de todos os elementos */
+    box-sizing: border-box; /* Garante que bordas e padding não aumentem o tamanho final do elemento */
+    list-style: none; /* Remove marcadores (bolinhas/números) de todas as listas */
+    font-family: "Montserrat", sans-serif; /* Define a fonte padrão principal do site */
+}
+
+body {
+    background-color: #0f0f1e; /* Define a cor de fundo sólida escura (caso o gradiente falhe ou fundo da página) */
+    color: white; /* Define a cor padrão do texto como branco para contraste */
+    font-size: 16px; /* Tamanho base da fonte para cálculos de 'rem' */
+    overflow: hidden; /* Impede a rolagem da página (site estilo App/Slide único) */
+}
+
+/* =========================================
+   CABEÇALHO (HEADER)
+   ========================================= */
+header {
+    position: fixed; /* Fixa o cabeçalho no topo, mesmo se houvesse rolagem */
+    width: 90vw; /* Ocupa 90% da largura da janela de visualização */
+    top: 0; /* Cola o elemento no topo absoluto da tela */
+    padding: 20px 8%; /* Espaçamento interno: 20px vertical, 8% horizontal (para centralizar visualmente) */
+    display: flex; /* Ativa o modelo Flexbox para alinhar Logo e Menu */
+    justify-content: space-between; /* Empurra o Logo para a esquerda e o Menu para a direita */
+    align-items: center; /* Centraliza os itens verticalmente dentro do cabeçalho */
+    z-index: 3; /* Camada 3: Fica acima do fundo e dos slides, mas abaixo do Modal */
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif; /* Fonte estilizada/futurista específica para a marca */
+    font-size: 2rem; /* Tamanho grande para o logo */
+    font-weight: 900; /* Negrito extra-pesado */
+    color: #00f7ff; /* Cor do texto em azul neon ciano */
+    text-shadow: 0 0 10px rgba(0, 247, 255, 0.7); /* Cria o efeito de brilho/neon ao redor das letras */
+}
+
+header nav ul {
+    display: flex; /* Coloca os itens da lista (li) um ao lado do outro */
+    gap: 48px; /* Cria um espaçamento de 48px entre cada link do menu */
+}
+
+header nav ul li {
+    cursor: pointer; /* Muda o cursor para "mãozinha" indicando que é clicável */
+    position: relative; /* Define o contexto para o posicionamento absoluto da linha (::after) */
+    padding: 5px 0; /* Espaço vertical para a linha não colar no texto */
+}
+
+/* Efeito da linha sublinhada animada */
+header nav ul li::after {
+    content: ''; /* Pseudo-elemento obrigatório (conteúdo vazio) para desenhar a linha */
+    position: absolute; /* Posiciona livremente dentro do 'li' */
+    left: 0; /* Começa alinhado à esquerda do texto */
+    bottom: 0; /* Posiciona na parte inferior do 'li' */
+    width: 0px; /* Começa invisível (largura zero) */
+    height: 2px; /* Espessura da linha */
+    background-color: #00f7ff; /* Cor da linha (azul neon) */
+    transition: width 0.5s ease; /* Anima a mudança de largura suavemente por 0.5 segundos */
+}
+
+header nav ul li:hover::after {
+    width: 100%; /* Ao passar o mouse, a largura vai de 0 a 100% do tamanho do texto */
+}
+
+/* =========================================
+   CONTAINER PRINCIPAL E SLIDER
+   ========================================= */
+.container {
+    height: 100vh; /* O container ocupa 100% da altura da tela visível */
+    position: relative; /* Define contexto para elementos absolutos internos (setas, slides) */
+    background: linear-gradient(135deg, #0f0f1e 0%, #1f1f3a 100%); /* Fundo degradê diagonal */
+    overflow: hidden; /* Garante que nada saia das bordas do container principal */
+}
+
+/* Animação de pulso (não utilizada explicitamente no HTML fornecido, mas pronta para uso) */
+@keyframes pulse {
+    0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.8); } /* Começa pequeno e meio transparente */
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1.5); } /* Termina grande e opaco */
+}
+
+.list {
+    width: 80%; /* Define a largura da área onde os slides aparecem */
+    height: 100vh; /* Altura total da tela */
+    margin: 0 auto; /* Centraliza o bloco .list horizontalmente na tela */
+    position: relative; /* Contexto para empilhar os slides (.item) */
+}
+
+.item {
+    position: absolute; /* Remove do fluxo normal para empilhar um slide sobre o outro */
+    inset: 0; /* Atalho para top:0, right:0, bottom:0, left:0 (ocupa todo o pai) */
+    display: flex; /* Flexbox para alinhar Imagem e Texto lado a lado */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    font-size: 2rem; /* Tamanho base de fonte herdado pelos filhos */
+    opacity: 0; /* Slide inativo começa invisível */
+    transform: translateX(100vw); /* Slide inativo começa fora da tela (à direita) */
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out; /* Configura a animação de entrada/saída */
+}
+
+/* Classe adicionada via JavaScript para mostrar o slide atual */
+.active {
+    opacity: 1; /* Torna o slide visível */
+    transform: translateX(0); /* Traz o slide para o centro da tela (posição original) */
+}
+
+/* =========================================
+   ÁREA DA IMAGEM DO PRODUTO
+   ========================================= */
+.product-img {
+    width: 45%; /* A imagem ocupa 45% da largura do slide */
+    height: 100%; /* Altura total */
+    display: flex; /* Flexbox para centralizar a tag <img> dentro desta div */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    position: relative; /* Posição relativa caso precise de z-index */
+    z-index: 2; /* Fica acima dos círculos de fundo */
+}
+
+.product-img img {
+    max-width: 80%; /* A imagem nunca passa de 80% da largura da div pai */
+    max-height: 90%; /* A imagem nunca passa de 90% da altura da div pai */
+    filter: drop-shadow(0 0 30px rgba(0, 247, 255, 0.3)); /* Sombra difusa colorida (glow) na imagem PNG */
+    transform: translateX(300px); /* Começa deslocada para a direita */
+    opacity: 0; /* Começa invisível */
+    transition: transform 0.6s ease, opacity 0.6s ease; /* Animação suave de entrada */
+    transition-delay: 0.7s; /* Atraso: espera o slide chegar para a imagem aparecer */
+}
+
+/* Estado da imagem quando o slide é o ativo */
+.active .product-img img {
+    transform: translateX(0); /* Imagem vai para a posição correta */
+    opacity: 1; /* Imagem fica visível */
+}
+
+/* =========================================
+   ÁREA DE CONTEÚDO (TEXTO)
+   ========================================= */
+.content {
+    width: 55%; /* O texto ocupa 55% da largura do slide */
+    padding-right: 80px; /* Espaço na direita para não colar na borda da tela */
+    display: flex; /* Flexbox para organizar título, descrição e botão */
+    align-items: flex-start; /* Alinha tudo à esquerda */
+    justify-content: center; /* Centraliza o bloco verticalmente na tela */
+    z-index: 2; /* Garante que o texto fique acima do fundo */
+    flex-direction: column; /* Empilha os elementos (Tag, Título, Desc, Botão) */
+}
+
+.product-tag {
+    font-size: 1rem; /* Tamanho pequeno para a etiqueta (ex: "Novo Lançamento") */
+    text-transform: uppercase; /* Força letras maiúsculas */
+    color: #00f7ff; /* Cor neon */
+    font-weight: 600; /* Negrito médio */
+    letter-spacing: 2px; /* Espaçamento entre letras para estilo moderno */
+    margin-bottom: 10px; /* Espaço abaixo da etiqueta */
+}
+
+.product-name {
+    font-size: 4.5rem; /* Título bem grande */
+    font-family: "Orbitron", sans-serif; /* Fonte futurista */
+    line-height: 1.1; /* Altura da linha apertada para títulos grandes */
+    margin-bottom: 20px; /* Espaço abaixo do título */
+    transform: translateX(300px); /* Título começa deslocado à direita */
+    opacity: 0; /* Título começa invisível */
+    transition: transform 0.6s ease, opacity 0.6s ease; /* Animação de entrada */
+    transition-delay: 0.7s; /* Espera o slide chegar para aparecer */
+}
+
+/* Estado do título quando o slide é ativo */
+.active .product-name {
+    transform: translateX(0); /* Vai para posição correta */
+    opacity: 1; /* Fica visível */
+}
+
+.product-description {
+    display: -webkit-box; /* Prepara o elemento para limitar linhas (suporte Webkit) */
+    -webkit-line-clamp: 3; /* Limita o texto a 3 linhas visíveis inicialmente */
+    -webkit-box-orient: vertical; /* Orientação vertical para o box */
+    overflow: hidden; /* Corta o texto que exceder as 3 linhas */
+    transition: all 0.3s ease; /* Suaviza a expansão se houver script para ler mais */
+    font-size: 0.9rem; /* Tamanho do texto de leitura */
+    color: #b8b8d0; /* Cinza azulado claro para boa leitura em fundo escuro */
+    line-height: 1.6; /* Altura da linha confortável */
+    margin: 20px 0; /* Espaçamento vertical (antes e depois do parágrafo) */
+}
+
+/* Classe opcional para expandir o texto via JS */
+.product-description.expanded {  
+    -webkit-line-clamp: unset; /* Remove o limite de linhas */
+    display: block; /* Volta ao comportamento de bloco padrão */
+}
+
+/* =========================================
+   BOTÕES (CTA e SETAS)
+   ========================================= */
+.btn {
+    padding: 12px 17px; /* Tamanho interno do botão */
+    background: linear-gradient(90deg, #00f7ff 0%, #57c785 50%, #eddd53 100%); /* Gradiente tricolor */
+    border-radius: 30px; /* Borda totalmente arredondada (Pill shape) */
+    color: #000; /* Texto preto para contrastar com o gradiente brilhante */
+    font-size: 1rem; /* Tamanho da fonte */
+    font-weight: 600; /* Negrito */
+    cursor: pointer; /* Cursor de clique */
+    border: none; /* Sem borda padrão */
+    z-index: 10; /* Z-index alto para garantir que seja clicável */
+}
+
+.btn:hover {
+    box-shadow: 0 0 15px rgba(0, 247, 255, 0.7); /* Adiciona brilho externo ao passar o mouse */
+    transform: scale(1.05); /* Aumenta o botão levemente (efeito de zoom) */
+    transition: 0.3s ease; /* Transição suave para o hover */
+}
+
+.arrows {
+    position: absolute; /* Fixa sobre o container */
+    width: 90%; /* Largura quase total da tela */
+    display: flex; /* Flexbox para separar as setas */
+    justify-content: space-between; /* Joga uma seta para cada extremo (esq/dir) */
+    top: 50%; /* Posiciona no meio vertical da tela */
+    left: 50%; /* Posiciona no meio horizontal */
+    transform: translate(-50%, -50%); /* Centralização exata compensando o tamanho */
+    z-index: 5; /* Camada 5: Acima dos slides, abaixo do Modal */
+}
+
+.btn-arrow {
+    width: 50px; /* Largura do botão de seta */
+    height: 50px; /* Altura do botão de seta */
+    border-radius: 50%; /* Círculo perfeito */
+    cursor: pointer; /* Cursor de clique */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo translúcido */
+    border: 1px solid rgba(0, 247, 255, 0.3); /* Borda fina ciano neon */
+    display: flex; /* Flexbox para centralizar o ícone da seta dentro da bola */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+.btn-arrow:hover {
+    background-color: rgba(222, 227, 227, 0.171); /* Clareia o fundo ao passar o mouse */
+    box-shadow: 0 0 10px rgba(0, 247, 255, 0.5); /* Adiciona brilho neon */
+}
+
+/* =========================================
+   INDICADORES E DECORAÇÃO
+   ========================================= */
+.indicators {
+    position: absolute; /* Fixa na parte inferior */
+    bottom: 40px; /* 40px de distância do fundo */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translateX(-50%); /* Ajuste fino do centro */
+    display: flex; /* Coluna para o número ficar em cima dos traços */
+    flex-direction: column; 
+    align-items: center; /* Centraliza itens */
+    gap: 15px; /* Espaço entre o número e os traços */
+    z-index: 5; /* Acima dos slides */
+}
+
+.number {
+    font-family: 'Orbitron', sans-serif; /* Fonte futurista */
+    font-size: 3rem; /* Tamanho grande */
+    font-weight: 800; /* Negrito forte */
+    color: rgba(255, 255, 255, 0.2); /* Branco muito transparente (marca d'água) */
+}
+
+.dots {
+    display: flex; /* Coloca os traços lado a lado */
+    gap: 15px; /* Espaço entre os traços */
+}
+
+.dot {
+    width: 40px; /* Comprimento do traço */
+    height: 4px; /* Altura do traço */
+    background-color: rgba(255, 255, 255, 0.2); /* Cor inativa (transparente) */
+    border-radius: 2px; /* Pontas arredondadas */
+}
+
+.dot.active {
+    background-color: #00f7ff; /* Cor ativa (Neon) */
+    box-shadow: 0 0 10px rgba(0, 247, 255, 0.5); /* Brilho no traço ativo */
+}
+
+/* Círculos decorativos de fundo */
+.circle {
+    position: absolute; /* Posição livre no container */
+    border-radius: 50%; /* Garante forma circular */
+    border: 1px solid rgba(0, 247, 255, 0.2); /* Apenas borda fina e transparente */
+}
+
+/* Posicionamento aleatório dos círculos decorativos */
+.circle:nth-child(1) { width: 200px; height: 200px; top: 10%; left: 10%; }
+.circle:nth-child(2) { width: 300px; height: 300px; top: 60%; left: 80%; }
+.circle:nth-child(3) { width: 150px; height: 150px; top: 80%; left: 20%; }
+.circle:nth-child(4) { width: 250px; height: 250px; top: 30%; left: 50%; }
+
+/* =========================================
+   MODAL (POPUP DE CONTATO/COMPRA)
+   ========================================= */
+.modal-overlay {
+    position: fixed; /* Fixa na tela inteira, ignorando rolagem */
+    top: 0; 
+    left: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    background: rgba(15, 15, 30, 0.95); /* Fundo muito escuro e quase opaco para focar no modal */
+    z-index: 2000; /* Z-Index extremo: deve ficar ACIMA do Header (3) e Setas (5) */
+    display: none; /* Padrão: escondido (display none) */
+    justify-content: center; /* Centraliza a caixa do modal horizontalmente */
+    align-items: center; /* Centraliza a caixa do modal verticalmente */
+    opacity: 0; /* Começa totalmente transparente para animação */
+    transition: opacity 0.3s ease; /* Animação de aparecimento (fade-in) */
+}
+
+/* Classe ativada via JS para abrir o modal */
+.modal-overlay.open {
+    display: flex; /* Muda de none para flex para aparecer */
+    opacity: 1; /* Torna visível */
+}
+
+.modal-box {
+    background: linear-gradient(135deg, #1f1f3a 0%, #0f0f1e 100%); /* Fundo degradê combinando com o site */
+    padding: 40px; /* Espaço interno confortável */
+    border-radius: 20px; /* Bordas arredondadas modernas */
+    width: 90%; /* Responsivo: ocupa 90% da tela em celulares */
+    max-width: 500px; /* Trava a largura máxima em 500px para desktops */
+    border: 1px solid rgba(0, 247, 255, 0.3); /* Borda fina neon */
+    box-shadow: 0 0 30px rgba(0, 247, 255, 0.15); /* Sombra difusa ciano atrás da caixa */
+    position: relative; /* Contexto para posicionar o botão de fechar */
+    text-align: center; /* Centraliza os textos dentro da caixa */
+}
+
+.modal-box h2 {
+    font-family: 'Orbitron', sans-serif; /* Fonte do título */
+    color: #00f7ff; /* Cor neon */
+    margin-bottom: 25px; /* Espaço abaixo do título */
+    font-size: 1.8rem; /* Tamanho do título */
+    text-transform: uppercase; /* Letras maiúsculas */
+}
+
+.close-btn {
+    position: absolute; /* Posiciona livremente dentro do modal-box */
+    top: 15px; /* Canto superior */
+    right: 20px; /* Canto direito */
+    font-size: 2rem; /* Tamanho do ícone 'X' */
+    color: rgba(255, 255, 255, 0.5); /* Cor discreta inicial */
+    cursor: pointer; /* Cursor de clique */
+    transition: 0.3s; /* Transição suave de cor */
+}
+
+.close-btn:hover {
+    color: #00f7ff; /* Fica neon ao passar o mouse */
+}
+
+.input-group {
+    margin-bottom: 20px; /* Espaço entre cada campo do formulário */
+    text-align: left; /* Rótulos e inputs alinhados à esquerda */
+}
+
+.input-group label {
+    display: block; /* Ocupa a linha inteira (fica acima do input) */
+    color: #b8b8d0; /* Cor do texto do rótulo */
+    margin-bottom: 8px; /* Espaço pequeno entre rótulo e campo */
+    font-size: 0.9rem; /* Tamanho da fonte */
+    font-weight: 600; /* Peso da fonte */
+}
+
+.input-group input, 
+.input-group textarea {
+    width: 100%; /* Ocupa toda a largura disponível */
+    padding: 12px 15px; /* Área interna de digitação */
+    background: rgba(255, 255, 255, 0.05); /* Fundo do campo bem transparente */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
+    border-radius: 8px; /* Cantos levemente arredondados */
+    color: white; /* Cor do texto digitado */
+    font-family: 'Montserrat', sans-serif; /* Fonte do texto digitado */
+    outline: none; /* Remove a linha azul padrão do navegador ao clicar */
+    transition: 0.3s; /* Animação ao focar no campo */
+    font-size: 1rem; /* Tamanho da letra */
+}
+
+.input-group textarea {
+    height: 120px; /* Altura fixa para a área de texto */
+    resize: none; /* Impede que o usuário redimensione a caixa */
+}
+
+/* Efeito ao clicar/focar no campo */
+.input-group input:focus, 
+.input-group textarea:focus {
+    border-color: #00f7ff; /* Borda fica azul neon */
+    box-shadow: 0 0 10px rgba(0, 247, 255, 0.3); /* Brilho neon externo */
+}
+
+.btn-submit {
+    width: 100%; /* Botão ocupa largura total do modal */
+    margin-top: 10px; /* Espaço superior */
+    font-size: 1.1rem; /* Fonte um pouco maior que o padrão */
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!-- Define o tipo do documento como HTML5 -->
+
+<html lang="pt-br">
+<!-- Tag raiz do HTML | Define o idioma da página como Português do Brasil -->
+
+<head>
+    <!-- Cabeçalho do documento: contém metadados -->
+
+    <meta charset="UTF-8">
+    <!-- Define o conjunto de caracteres como UTF-8 (permite acentos e caracteres especiais) -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Controla o layout em dispositivos móveis (responsividade) -->
+
+    <!-- Importação de fontes externas do Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Orbitron:wght@400..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Importação do arquivo CSS externo responsável pelo visual do site -->
+    <link rel="stylesheet" href="projetostyle.css">
+
+    <!-- Importação do arquivo JavaScript externo -->
+    <!-- Normalmente controla animações, carrossel e modal -->
+    <script src="projetojs.js"></script>
+
+    <!-- Título exibido na aba do navegador -->
+    <title>PROJETO NOVO</title>
+</head>
+
+<body>
+    <!-- Corpo do site: tudo que aparece visualmente -->
+
+    <!-- ====================== CABEÇALHO ====================== -->
+    <header>
+        <!-- Área do logotipo -->
+        <div class="logo">Coruja Cell</div>
+
+        <!-- Navegação principal do site -->
+        <nav>
+            <ul>
+                <!-- Item do menu: página inicial -->
+                <li>Home</li>
+
+                <!-- Item do menu: seção de produtos -->
+                <li>Produtos</li>
+
+                <!-- Item do menu: abre o modal de contato via JavaScript -->
+                <li id="btncontato">Contatos</li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ====================== CONTEÚDO PRINCIPAL ====================== -->
+    <main class="container">
+        <!-- Container principal que envolve o carrossel -->
+
+        <!-- Elementos decorativos em formato de círculos -->
+        <!-- Usados apenas para efeito visual/tecnológico -->
+        <div class="tech-circle">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+
+        <!-- Lista de produtos -->
+        <!-- Funciona como um slider/carrossel -->
+        <div class="list">
+
+            <!-- ====================== PRODUTO 1 ====================== -->
+            <!-- Classe "active" indica o item visível inicialmente -->
+            <div class="item active">
+
+                <!-- Área da imagem do produto -->
+                <div class="product-img">
+                    <img src="img/apple-watch.png" alt="Apple Watch">
+                </div>
+
+                <!-- Conteúdo textual do produto -->
+                <div class="content">
+
+                    <!-- Categoria ou destaque do produto -->
+                    <p class="product-tag">Novo Lançamento</p>
+
+                    <!-- Nome do produto -->
+                    <p class="product-name">Apple Watch Series 10</p>
+
+                    <!-- Descrição detalhada do produto -->
+                    <p class="product-description">
+                        O Apple Watch Series 10 é uma evolução elegante, mais fino e confortável,
+                        com ecrã maior e mais brilhante (até 2000 nits) para melhor visibilidade...
+                    </p>
+
+                    <!-- Botão de ação -->
+                    <button class="btn">SAIBA MAIS</button>
+                </div>
+            </div>
+
+            <!-- ====================== PRODUTO 2 ====================== -->
+            <div class="item">
+
+                <!-- Imagem do produto -->
+                <div class="product-img">
+                    <img src="img/air-pods.png" alt="AirPods Max">
+                </div>
+
+                <!-- Conteúdo do produto -->
+                <div class="content">
+                    <p class="product-tag">Som Premium</p>
+                    <p class="product-name">AirPods Max</p>
+
+                    <p class="product-description">
+                        Os AirPods Max são fones de ouvido over-ear premium da Apple,
+                        conhecidos pela qualidade de som de alta-fidelidade...
+                    </p>
+
+                    <button class="btn">SAIBA MAIS</button>
+                </div>
+            </div>
+
+            <!-- ====================== PRODUTO 3 ====================== -->
+            <div class="item">
+
+                <!-- Imagem do produto -->
+                <div class="product-img">
+                    <img src="img/vision-pro.png" alt="Apple Vision Pro">
+                </div>
+
+                <!-- Conteúdo do produto -->
+                <div class="content">
+                    <p class="product-tag">Alta Performance</p>
+                    <p class="product-name">Apple Vision Pro</p>
+
+                    <p class="product-description">
+                        O Apple Vision Pro é um "computador espacial" que funde
+                        realidade aumentada e virtual...
+                    </p>
+
+                    <button class="btn">SAIBA MAIS</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====================== CONTROLES DO CARROSSEL ====================== -->
+        <div class="arrows">
+
+            <!-- Botão para voltar ao item anterior -->
+            <button class="btn-arrow" id="prev">
+                <!-- Ícone SVG de seta esquerda -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M10 12.796V3.204L4.519 8zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753" />
+                </svg>
+            </button>
+
+            <!-- Botão para avançar ao próximo item -->
+            <button class="btn-arrow" id="next">
+                <!-- Ícone SVG de seta direita -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M6 12.796V3.204L11.481 8zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- ====================== INDICADORES ====================== -->
+        <div class="indicators">
+
+            <!-- Número do slide atual -->
+            <div class="number">01</div>
+
+            <!-- Pontos que indicam quantos slides existem -->
+            <div class="dots">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ====================== MODAL DE CONTATO ====================== -->
+    <!-- Overlay escuro que cobre a tela -->
+    <div class="modal-overlay" id="modalContato">
+
+        <!-- Caixa central do modal -->
+        <div class="modal-box">
+
+            <!-- Botão para fechar o modal -->
+            <span class="close-btn" id="closeModal">&times;</span>
+
+            <!-- Título do modal -->
+            <h2>Fale Conosco</h2>
+
+            <!-- Formulário de contato -->
+            <!-- Envia dados para o serviço Formspree -->
+            <form action="https://formspree.io/f/SEU_CODIGO_AQUI" method="POST">
+
+                <!-- Campo de nome -->
+                <div class="input-group">
+                    <label>Nome</label>
+                    <input type="text" name="name" required placeholder="Seu nome">
+                </div>
+
+                <!-- Campo de e-mail -->
+                <div class="input-group">
+                    <label>E-mail</label>
+                    <input type="email" name="email" required placeholder="seu@email.com">
+                </div>
+
+                <!-- Campo de mensagem -->
+                <div class="input-group">
+                    <label>Mensagem</label>
+                    <textarea name="message" required placeholder="Como podemos ajudar?"></textarea>
+                </div>
+
+                <!-- Botão para enviar o formulário -->
+                <button type="submit" class="btn btn-submit">ENVIAR</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
