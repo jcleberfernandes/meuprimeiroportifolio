@@ -1,228 +1,318 @@
-/* Reset padrão: remove margens/preenchimentos e define o modelo de caixa */
+/* Base visual moderna, limpa e responsiva */
 * {
-    margin: 0; padding: 0;                    /* Remove espaçamentos automáticos do navegador */
-    box-sizing: border-box;                   /* Impede que bordas aumentem o tamanho total dos elementos */
-    font-family: 'Segoe UI', sans-serif;      /* Define a fonte padrão para todo o texto do HTML */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Define o comportamento de rolagem suave para toda a página */
-html {
-    scroll-behavior: smooth;                  /* Faz a tela deslizar suavemente ao clicar nos links */
-}
-
-/* Declaração de variáveis globais de cores e efeitos */
 :root {
-    --primario: grey;                         /* Cor principal usada em botões e destaques */
-    --secundario: #ffffff;                    /* Cor branca para textos e fundos claros */
-    --escuro: #333333;                        /* Cor cinza escuro para o fundo principal */
-    --maisescuro: #000000;                    /* Preto absoluto para contrastes fortes */
-    --claro: #f4f4f4;                         /* Cinza bem claro para detalhes sutis */
-    --vidro: rgba(255, 255, 255, 0.2);        /* Transparência branca para efeito de vidro */
+    --bg-1: #0f172a;
+    --bg-2: #1e293b;
+    --surface: rgba(15, 23, 42, 0.68);
+    --surface-strong: rgba(15, 23, 42, 0.88);
+    --text: #f8fafc;
+    --muted: #cbd5e1;
+    --line: rgba(148, 163, 184, 0.28);
+    --accent: #22c55e;
+    --accent-2: #06b6d4;
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --shadow: 0 12px 40px rgba(2, 6, 23, 0.35);
+    --space-section: 4.5rem;
+    --space-inline: 1.4rem;
 }
 
-/* Configuração de cor de fundo e texto padrão do corpo */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    background-color: var(--escuro);          /* Aplica o fundo cinza escuro no corpo do site */
-    color: var(--secundario);                 /* Define que todos os textos serão brancos por padrão */
+    font-family: "Outfit", "Segoe UI", sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+    background:
+        radial-gradient(circle at 12% 15%, rgba(34, 197, 94, 0.2), transparent 30%),
+        radial-gradient(circle at 85% 12%, rgba(6, 182, 212, 0.22), transparent 32%),
+        linear-gradient(160deg, var(--bg-1), var(--bg-2));
+    min-height: 100vh;
 }
 
-/* Fixa a barra de navegação no topo e define sua aparência */
+/* Menu fixo com efeito de vidro */
 .navegacao {
-    position: fixed; top: 0%;                 /* Prende o menu no topo da tela durante o scroll */
-    background: rgba(15, 23, 42, 0.8);        /* Fundo escuro semi-transparente para o menu */
-    width: 100%; z-index: 100;                /* Ocupa toda a largura e fica por cima de outros elementos */
-    padding: 1.5rem;                          /* Espaço interno para os links não tocarem as bordas */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 0.9rem 1rem;
+    background: rgba(2, 6, 23, 0.58);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
 }
 
-/* Organiza os itens da lista do menu em linha e centralizados */
 .menu {
-    display: flex;                            /* Ativa o alinhamento flexível para os itens da lista */
-    justify-content: center;                  /* Centraliza os links do menu horizontalmente */
-    list-style: none; gap: 3rem;              /* Remove as bolinhas da lista e afasta os itens */
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.4rem;
 }
 
-/* Estiliza os links do menu e prepara a posição para o efeito de linha */
 .menu-link {
-    text-decoration: none;                    /* Remove o sublinhado padrão de links azuis */
-    color: var(--secundario);                 /* Aplica a cor branca definida nas variáveis */
-    font-weight: 500; position: relative;     /* Deixa o texto médio e prepara para a linha animada */
-    padding: 0.5rem 0;                        /* Espaço vertical para o clique do mouse */
+    text-decoration: none;
+    color: var(--text);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.92rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: relative;
+    padding: 0.35rem 0.1rem;
 }
 
-/* Cria a linha invisível abaixo do link para animação futura */
 .menu-link::after {
-    content: ''; position: absolute;          /* Cria um elemento visual extra sem mexer no HTML */
-    height: 2px; width: 0%;                   /* Define a espessura da linha, começando com largura zero */
-    bottom: 0; left: 0; background: grey;     /* Posiciona a linha na base e define a cor cinza */
-    transition: width 0.3s ease;              /* Controla a velocidade da linha aparecendo */
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transition: width 0.28s ease;
 }
 
-/* Faz a linha aparecer totalmente ao passar o mouse sobre o link */
 .menu-link:hover::after {
-    width: 100%;                              /* Faz a linha ocupar 100% da largura ao passar o mouse */
+    width: 100%;
 }
 
-/* Centraliza o conteúdo principal (Hero) vertical e horizontalmente */
+/* Hero principal */
 .cabecalho {
-    min-height: 99vh;                         /* Faz a seção de abertura ocupar quase toda a tela */
-    display: flex; flex-direction: column;    /* Organiza foto e nome um embaixo do outro */
-    justify-content: center;                  /* Centraliza o conteúdo no meio da altura da tela */
-    align-items: center;                      /* Centraliza o conteúdo no meio da largura da tela */
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.7rem;
+    padding: 5.8rem var(--space-inline) 2.2rem;
 }
 
-/* Define dimensões, bordas arredondadas e sombra da foto de perfil */
 .foto-perfil {
-    width: 350px; height: 350px;              /* Define o tamanho fixo da imagem de perfil */
-    box-shadow: 0 0 20px rgba(79, 70, 229, 0.3); /* Aplica um brilho suave ao redor da foto */
-    border-radius: 50%;                       /* Transforma o quadrado da imagem em um círculo */
-    border: 10px solid var(--vidro);          /* Cria uma moldura grossa e transparente (vidro) */
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(248, 250, 252, 0.55);
+    box-shadow: 0 12px 35px rgba(2, 6, 23, 0.45);
 }
 
-/* Estiliza o título principal com tamanho e margens específicas */
 h1 {
-    font-size: 3.0rem; font-weight: bold;     /* Deixa o seu nome grande e com traço grosso */
-    margin: 20px 0 10px 0;                    /* Dá espaço entre o nome, a foto e o parágrafo */
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: 0.03em;
 }
 
-/* Aplica espaçamento interno para a seção "Sobre" */
+.cabecalho-subtitulo {
+    color: var(--muted);
+    font-size: clamp(1rem, 2.6vw, 1.15rem);
+}
+
+/* Blocos das seções */
+.sobre,
+.projetos,
+.contato {
+    padding: var(--space-section) var(--space-inline);
+}
+
+/* Aproxima o Sobre da capa sem colidir com o menu */
 .sobre {
-    padding: 6rem 2rem;                       /* Cria um respiro grande entre as seções do site */
+    padding-top: 2.4rem;
+    margin-top: -0.4rem;
 }
 
-/* Estiliza e centraliza o título da seção "Sobre" */
-.sobre-titulo {
-    font-size: 3rem; text-align: center;      /* Define o tamanho e centraliza o título da seção */
-    margin-bottom: 20px;                      /* Empurra o texto para baixo para não ficar grudado */
+.sobre-titulo,
+.projeto-titulo,
+.contato-titulo {
+    text-align: center;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.02em;
+    
 }
 
-/* Configura a caixa com efeito de desfoque e transparência (vidro) */
-.sobre-caixa {
-    padding: 2rem; max-width: 800px;          /* Define o tamanho interno e largura máxima do texto */
-    margin: 0 auto; border-radius: 16px;      /* Centraliza a caixa na tela e arredonda as quinas */
-    backdrop-filter: blur(10px);              /* Faz o fundo atrás da caixa ficar embaçado */
-    background: var(--vidro);                 /* Aplica a cor semi-transparente na caixa */
-}
 
-/* Centraliza o texto e define o tamanho da fonte dos parágrafos */
-.paragrafo {
-    text-align: center; font-size: 1.5rem;    /* Centraliza e aumenta a letra do texto descritivo */
-}
-
-/* Define o preenchimento da seção de projetos */
-.projeto {
-    padding: 6rem 2rem;                       /* Mantém o mesmo espaçamento da seção "Sobre" */
-}
-
-/* Centraliza e define margem para o título de projetos */
-.projeto-titulo {
-    text-align: center; font-size: 2.5rem;    /* Centraliza e define o tamanho do título de projetos */
-    margin-bottom: 50px;                      /* Dá espaço entre o título e os cards dos projetos */
-}
-
-/* Aplica sombra e leve aumento de escala ao interagir com o card */
-.projeto-card:hover {
-    box-shadow: 0 10px 20px grey;             /* Adiciona sombra cinza ao passar o mouse */
-    transform: translateY(-10px) scale(1.03); /* Faz o card "flutuar" e crescer levemente */
-}
-
-/* Cria o grid responsivo para alinhar os cartões de projeto */
-.projeto-caixa {
-    display: grid;                            /* Ativa o sistema de malha (grade) de projetos */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Faz os cards se ajustarem sozinhos à tela */
-    gap: 2rem; max-width: 1100px;             /* Define o espaço entre cards e a largura do conjunto */
-    margin: 0 auto;                           /* Centraliza o bloco de projetos no meio da página */
-}
-
-/* Define o visual do card, centraliza conteúdo e oculta sobras */
+.sobre-caixa,
+.formulario-contato,
 .projeto-card {
-    background: var(--vidro);                 /* Aplica o efeito de vidro no fundo do card */
-    border-radius: 16px; overflow: hidden;    /* Arredonda o card e corta imagens que saiam da borda */
-    display: flex; flex-direction: column;    /* Alinha imagem e texto um abaixo do outro */
-    align-items: center; text-align: center;  /* Centraliza todo o conteúdo dentro do card */
-    transition: all 0.5s ease;                /* Torna todas as animações do card suaves */
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow);
 }
 
-/* Ajusta a imagem para cobrir a área sem distorcer e define altura */
+.sobre-caixa {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 1.6rem;
+}
+
+.paragrafo {
+    text-align: center;
+    color: var(--muted);
+    
+    font-size: clamp(1rem, 2.2vw, 1.14rem);
+}
+
+.projeto-caixa {
+    max-width: 980px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+}
+
+.projeto-card {
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.projeto-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(2, 6, 23, 0.45);
+}
+
 .projeto-imagem {
-    height: 300px; width: 100%;               /* Define altura fixa e largura total da imagem no card */
-    object-fit: cover;                        /* Corta a imagem para preencher o espaço sem esticar */
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
 }
 
-/* Gerencia o espaçamento e alinhamento do texto interno do card */
 .caixa-texto-projeto {
-    padding: 1.5rem;                          /* Cria um respiro interno para os textos do card */
+    padding: 1.1rem 1.2rem 1.3rem;
 }
 
-/* Estiliza o título individual de cada projeto */
 .info-projeto {
-    margin-bottom: 10px; font-size: 1.5rem;   /* Define tamanho e espaço abaixo do nome do projeto */
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
 }
 
-/* Define a cor e o espaçamento entre linhas da descrição do projeto */
 .paragrafo-projeto {
-    color: var(--secundario);                 /* Mantém o texto da descrição do projeto em branco */
-    line-height: 1.5rem;                      /* Aumenta o espaço entre as linhas para facilitar a leitura */
+    color: var(--muted);
+    margin-bottom: 0.9rem;
+    text-align: center;
 }
 
-/* Configura o layout do formulário e o espaçamento entre campos */
-.formularrio-contato {
-    max-width: 600px; margin: 0 auto;         /* Define largura do form e centraliza na horizontal */
-    background: var(--escuro);                /* Define a cor de fundo interna do formulário */
-    padding: 2.5rem; border-radius: 16px;     /* Espaço interno grande e quinas arredondadas */
-    display: flex; flex-direction: column;    /* Coloca cada linha de input uma abaixo da outra */
-    gap: 1.5rem;                              /* Define o espaço entre cada campo do formulário */
-}
-
-/* Centraliza os campos de entrada dentro do formulário */
-.grupo-form {
-    display: flex; flex-direction: row;       /* Coloca a mensagem e o botão na mesma linha */
-    justify-content: center; gap: 1rem;       /* Centraliza o conjunto e dá espaço entre eles */
-    align-items: stretch; width: 100%;        /* Faz o botão ter a mesma altura da caixa de mensagem */
-}
-
-/* Estiliza o botão para ocupar uma parte menor da linha */
-.botao {
-    flex: 1; cursor: pointer;                 /* Define que o botão é menor que o campo e mostra a "mãozinha" */
-    background-color: var(--primario);        /* Aplica a cor cinza no fundo do botão */
-    color: white; border: none;               /* Texto branco e remove a borda padrão feia */
-    border-radius: 8px; font-weight: bold;    /* Arredonda quinas e destaca o texto do botão */
-    transition: 0.3s;                         /* Faz a transição de cor do hover ser suave */
-}
-
-/* Aplica efeito visual de destaque ao passar o mouse no botão */
-.botao:hover {
-    filter: brightness(1.1);                  /* Deixa o botão um pouco mais claro ao passar o mouse */
-    transform: scale(1.02);                   /* Dá um leve aumento de tamanho para indicar interação */
-}
-
-/* Altera o estado visual do botão quando clicado */
-.botao:active {
-    transform: scale(0.98);                   /* Dá um efeito de "clique" diminuindo levemente o botão */
-}
-
-/* Estiliza o design visual de inputs e textareas */
-.campo-form {
-    flex: 2; width: auto;                     /* Faz o campo de texto ser maior que o botão na linha */
-    padding: 1rem; border-radius: 8px;        /* Espaço para o texto não encostar na borda e arredonda */
-    background: rgba(15, 23, 42, 0.8);        /* Define o fundo escuro do campo de digitação */
-    color: white; border: 1px solid var(--vidro); /* Texto branco e borda discreta de vidro */
-    outline: none;                            /* Remove a linha azul que o navegador coloca ao clicar */
-}
-
-/* Altera a cor da borda quando o campo recebe foco/clique */
-.campo-form:focus {
-    border-color: whitesmoke;                 /* Muda a borda para branco fumaça ao clicar para digitar */
-    background-color: #333333;                /* Escurece o fundo para destacar que o campo está ativo */
-}
-
-/* Define altura mínima e comportamento de redimensionamento da área de texto */
-textarea.campo-form {
-    min-height: 120px;                        /* Garante um espaço bom para escrever mensagens longas */
-    resize: vertical;                         /* Permite que o usuário aumente a altura, mas não a largura */
-}
-
-/* Remove o sublinhado e define a cor padrão do link do projeto */
 .link-projeto {
-    text-decoration: none !important;         /* Garante que o link do GitHub não tenha sublinhado */
-    color: var(--claro);                      /* Define a cor clara para o link do projeto */
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    display: inline-block;
+    border: 1px solid rgba(34, 197, 94, 0.45);
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+    margin-left: 44%;
+}
+
+.link-projeto:hover {
+    background-color: rgba(34, 197, 94, 0.22);
+    border-color: rgba(34, 197, 94, 0.85);
+}
+
+.formulario-contato {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 1.35rem;
+    background: var(--surface-strong);
+    display: grid;
+    gap: 0.85rem;
+}
+
+.grupo-form {
+    display: grid;
+    gap: 0.65rem;
+}
+
+.campo-form {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: rgba(30, 41, 59, 0.75);
+    color: var(--text);
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.campo-form::placeholder {
+    color: rgba(203, 213, 225, 0.75);
+}
+
+.campo-form:focus {
+    border-color: rgba(6, 182, 212, 0.85);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+    background: rgba(30, 41, 59, 0.95);
+}
+
+textarea.campo-form {
+    min-height: 115px;
+    resize: vertical;
+}
+
+.botao {
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 0.9rem 1.1rem;
+    color: #052e16;
+    font-weight: 700;
+    font-family: "Space Grotesk", sans-serif;
+    letter-spacing: 0.03em;
+    background: linear-gradient(135deg, #34d399, #22c55e);
+    cursor: pointer;
+    transition: transform 0.18s ease, filter 0.2s ease;
+}
+
+.botao:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+}
+
+.botao:active {
+    transform: translateY(0);
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 768px) {
+    :root {
+        --space-section: 3.2rem;
+        --space-inline: 1rem;
+    }
+
+    .menu {
+        gap: 0.8rem;
+        flex-wrap: wrap;
+    }
+
+    .menu-link {
+        font-size: 0.8rem;
+    }
+
+    .cabecalho {
+        min-height: 80vh;
+        padding-top: 5.3rem;
+    }
+
+    .foto-perfil {
+        width: 200px;
+        height: 200px;
+    }
+
+    .sobre {
+        padding-top: 1.6rem;
+        margin-top: -0.2rem;
+    }
 }
