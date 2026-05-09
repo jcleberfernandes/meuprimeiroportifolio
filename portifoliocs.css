@@ -18,7 +18,7 @@
     --radius-lg: 18px;
     --radius-md: 12px;
     --shadow: 0 12px 40px rgba(2, 6, 23, 0.35);
-    --space-section: 4.5rem;
+    --space-section: 2.5rem;
     --space-inline: 1.4rem;
 }
 
@@ -190,6 +190,9 @@ h1 {
 
 .caixa-texto-projeto {
     padding: 1.1rem 1.2rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .info-projeto {
@@ -214,7 +217,6 @@ h1 {
     border-radius: 999px;
     padding: 0.5rem 1rem;
     transition: background-color 0.25s ease, border-color 0.25s ease;
-    margin-left: 44%;
 }
 
 .link-projeto:hover {
@@ -286,9 +288,42 @@ textarea.campo-form {
 }
 
 /* Ajustes para telas menores */
+.linkedin {
+    text-align: center;
+    padding: 3rem var(--space-inline) 4rem;
+}
+
+.linkedin-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--text);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 999px;
+    padding: 0.85rem 2rem;
+    background: var(--surface);
+    backdrop-filter: blur(8px);
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.linkedin-link:hover {
+    border-color: #0a66c2;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(10, 102, 194, 0.2);
+}
+
+.linkedin-icon {
+    width: 24px;
+    height: 24px;
+}
+
 @media (max-width: 768px) {
     :root {
-        --space-section: 3.2rem;
+        --space-section: 1.8rem;
         --space-inline: 1rem;
     }
 
